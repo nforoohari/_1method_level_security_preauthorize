@@ -7,17 +7,6 @@ server:
     key-password: 123456
   port: 8443
 
-
-#spring:
-#  datasource:
-#    username: root
-#    password: 1234
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-#    url: jdbc:mysql://localhost:3306/springsecurityshod
-
-
-#  security:
-#    user:
 logging:
   level:
     org:
@@ -25,8 +14,3 @@ logging:
         jdbc:
           core: TRACE
         security: trace
-
-
-
-authorization:
-  key: test1234

@@ -1,7 +1,5 @@
 package ir.digixo.config;
 
-//import jakarta.persistence.PreRemove;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -13,40 +11,24 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 @Configuration
 @EnableMethodSecurity(securedEnabled = true)
-//Deprecated
-//@EnableGlobalMethodSecurity
 public class UserManagementConfig {
-
 
     @Bean
     public UserDetailsService userDetailsService() {
+
         var service = new InMemoryUserDetailsManager();
-
-        var u1 = User.withUsername("mahsa").password("1234").roles("read").build();
-        var u2 = User.withUsername("ashkan").password("1234").authorities("write").build();
-
+        var u1 = User.withUsername("bita").password("1234").authorities("write").build();
+        var u2 = User.withUsername("borna").password("1234").roles("write").build();
+        var u3 = User.withUsername("bardia").password("1234").roles("read").build();
         service.createUser(u1);
         service.createUser(u2);
+        service.createUser(u3);
         return service;
     }
 
-
     @Bean
     public PasswordEncoder passwordEncoder() {
+
         return NoOpPasswordEncoder.getInstance();
     }
-
-
-  /*  @PreRemove
-    private void preventUnAuthorizedRemove() {
-        String username="sdsd";
-
-        String name = SecurityContextHolder.getContext().getAuthentication().getName();
-
-        if(!name.equals(username)){
-            throw new NotAuthorizedException("User can only delete himself ");
-        }
-
-    }*/
-
 }

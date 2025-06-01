@@ -2,7 +2,10 @@ package ir.digixo.controller;
 
 import ir.digixo.entity.Product;
 import ir.digixo.service.ProductService;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
 
@@ -10,23 +13,17 @@ import java.security.Principal;
 @RequestMapping("/")
 public class ProductController {
 
-    private ProductService bookService;
+    private final ProductService productService;
 
-    public ProductController(ProductService bookService) {
-        this.bookService = bookService;
+    public ProductController(ProductService productService) {
+        this.productService = productService;
     }
 
-   /* @GetMapping("/products/{code}")
-    public Product getDetails(@PathVariable String code) {
-        return bookService.getBook(code);
-    }*/
-   @GetMapping("/products/{owner}")
-   public Product delete(@PathVariable String owner,Principal principal ) {
-
-
-       System.out.println(principal.getName());
-       System.out.println(owner);
-       return bookService.getProduct(owner);
-   }
+    @GetMapping("/products/{owner}")
+    public Product getProduct(@PathVariable String owner, Principal principal) {
+        System.out.println("principal.getName() : " + principal.getName());
+        System.out.println("@PathVariable /products/{owner} : " + owner);
+        return productService.getProduct(owner);
+    }
 }
 
